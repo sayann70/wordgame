@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Guessing Game</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0ebe3;
+            color: #3e2723;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #3e2723;
+            font-size: 24px;
+        }
+        #hint {
+            font-size: 16px;
+            font-style: italic;
+            color: #5d4037;
+            margin-bottom: 10px;
+        }
+        #wordDisplay {
+            font-size: 26px;
+            letter-spacing: 5px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        input {
+            font-size: 16px;
+            padding: 10px;
+            width: 85%;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #5d4037;
+            text-align: center;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px;
+            border: none;
+            background-color: #3e2723;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 45%;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #2c1b14;
+        }
+        #message {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Word Guessing Game</h1>
+        <p id="hint">Hint: Loading...</p>
+        <p id="wordDisplay">_ _ _ _ _</p>
+        <input type="text" id="guessInput" placeholder="Enter your guess">
+        <br>
+        <button onclick="checkGuess()">Submit</button>
+        <button onclick="startGame()">New Word</button>
+        <p id="message"></p>
+    </div>
+    <script>
+        const words = [
+            { word: "apple", hint: "A common fruit that keeps the doctor away." },
+            { word: "banana", hint: "A yellow fruit that monkeys love." },
+            { word: "guitar", hint: "A musical instrument with strings." },
+            { word: "bridge", hint: "A structure used to cross a river." },
+            { word: "cloud", hint: "A fluffy thing in the sky." },
+            { word: "rabbit", hint: "An animal known for hopping." },
+            { word: "pencil", hint: "A tool used for writing and drawing." },
+            { word: "window", hint: "A glass pane in a house." },
+            { word: "planet", hint: "Earth is one of these." },
+            { word: "ocean", hint: "A vast body of saltwater." },
+            { word: "camera", hint: "A device used to take photos." },
+            { word: "bottle", hint: "A container used to hold liquids." },
+            { word: "castle", hint: "A large building where kings and queens live." },
+            { word: "rocket", hint: "A vehicle that travels into space." },
+            { word: "shadow", hint: "A dark shape made when something blocks light." },
+            { word: "garden", hint: "A place where flowers and vegetables grow." },
+            { word: "tunnel", hint: "A passage under the ground or water." },
+            { word: "zebra", hint: "A striped animal from Africa." },
+            { word: "island", hint: "A piece of land surrounded by water." },
+            { word: "forest", hint: "A large area full of trees." },
+            { word: "butterfly", hint: "A colorful insect that flies." },
+            { word: "sunshine", hint: "Bright light from the sun." },
+            { word: "chocolate", hint: "A sweet treat made from cocoa." },
+            { word: "lighthouse", hint: "A tall tower that guides ships." },
+            { word: "rainbow", hint: "A multicolored arc in the sky." },
+            { word: "diamond", hint: "A valuable, shiny gemstone." },
+            { word: "whistle", hint: "A sound made by blowing air." },
+            { word: "balloon", hint: "A floating object filled with air." },
+            { word: "fireworks", hint: "Colorful explosions in the sky." },
+            { word: "popcorn", hint: "A snack often eaten at movies." },
+            { word: "trampoline", hint: "A bouncy surface to jump on." },
+            { word: "snowflake", hint: "A unique ice crystal that falls from the sky." },
+            { word: "fountain", hint: "A water feature in parks." },
+            { word: "penguin", hint: "A black-and-white bird that can't fly." }
+        ];
+        
+        let currentWord = "";
+        let displayedWord = "";
+        let hintText = "";
+        
+        function startGame() {
+            let randomIndex = Math.floor(Math.random() * words.length);
+            currentWord = words[randomIndex].word;
+            hintText = words[randomIndex].hint;
+            displayedWord = "_ ".repeat(currentWord.length).trim();
+            
+            document.getElementById("hint").textContent = "Hint: " + hintText;
+            document.getElementById("wordDisplay").textContent = displayedWord;
+            document.getElementById("message").textContent = "";
+            document.getElementById("guessInput").value = "";
+        }
+        
+        function checkGuess() {
+            let guess = document.getElementById("guessInput").value.toLowerCase().trim();
+            if (guess === currentWord) {
+                document.getElementById("message").textContent = "🎉 Correct! The word is " + currentWord + "!";
+                document.getElementById("message").style.color = "green";
+            } else {
+                document.getElementById("message").textContent = "❌ Wrong guess. Try again!";
+                document.getElementById("message").style.color = "red";
+            }
+        }
+        
+        startGame();
+    </script>
+</body>
+</html>
